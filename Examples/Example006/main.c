@@ -59,6 +59,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 /* The task functions. */
 void vContinuousProcessingTask( void *pvParameters );
@@ -75,6 +76,8 @@ const char *pcTextForPeriodicTask = "Periodic task is running\r\n";
 
 int main( void )
 {
+	HwInit();
+
 	/* Create two instances of the continuous processing task, both at priority	1. */
 	xTaskCreate( vContinuousProcessingTask, "Task 1", 1000, (void*)pcTextForTask1, 1, NULL );
 	xTaskCreate( vContinuousProcessingTask, "Task 2", 1000, (void*)pcTextForTask2, 1, NULL );

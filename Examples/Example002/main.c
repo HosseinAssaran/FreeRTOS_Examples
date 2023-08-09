@@ -59,6 +59,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 /* Used as a loop counter to create a very crude delay. */
 #define mainDELAY_LOOP_COUNT		( 0xffffff )
@@ -76,6 +77,7 @@ const char *pcTextForTask2 = "Task 2 is running\r\n";
 
 int main( void )
 {
+	HwInit();
 	/* Create one of the two tasks. */
 	xTaskCreate(	vTaskFunction,			/* Pointer to the function that implements the task. */
 					"Task 1",				/* Text name for the task.  This is to facilitate debugging only. */

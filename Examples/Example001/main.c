@@ -60,22 +60,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
-
-#ifndef _WIN32
-/* printf() output uses the UART.  These constants define the addresses of the
-required UART registers. */
-#define UART0_ADDRESS   ( 0x40004000UL )
-#define UART0_DATA              ( * ( ( ( volatile uint32_t * )( UART0_ADDRESS + 0UL ) ) ) )
-#define UART0_STATE             ( * ( ( ( volatile uint32_t * )( UART0_ADDRESS + 4UL ) ) ) )
-#define UART0_CTRL              ( * ( ( ( volatile uint32_t * )( UART0_ADDRESS + 8UL ) ) ) )
-#define UART0_BAUDDIV   ( * ( ( ( volatile uint32_t * )( UART0_ADDRESS + 16UL ) ) ) )
-#define TX_BUFFER_MASK  ( 1UL )
-
-/*
- * Printf() output is sent to the serial port.  Initialise the serial hardware.
- */
-static void prvUARTInit( void );
-#endif /* _WIN32 */
+#include "hardware_init.h"
 
 /* Used as a loop counter to create a very crude delay. */
 #define mainDELAY_LOOP_COUNT		( 0xffffff )
@@ -89,10 +74,7 @@ void vTask2( void *pvParameters );
 int main( void )
 {
 
-#ifndef _WIN32
-    /* Hardware initialisation.  printf() output uses the UART for IO. */
-    prvUARTInit();
-#endif /* _WIN32 */
+	HwInit();
 
 	/* Create one of the two tasks. */
 	xTaskCreate(	vTask1,		/* Pointer to the function that implements the task. */
@@ -148,8 +130,8 @@ volatile uint32_t ul;
 	for( ;; )
 	{
 		/* Print out the name of this task. */
-		//vPrintString( pcTaskName );
-		printf(pcTaskName);
+		vPrintString( pcTaskName );
+		//printf(pcTaskName);
 
 		/* Delay for a period. */
 		for( ul = 0; ul < mainDELAY_LOOP_COUNT; ul++ )
@@ -161,13 +143,4 @@ volatile uint32_t ul;
 	}
 }
 /*-----------------------------------------------------------*/
-
-#ifndef _WIN32
-static void prvUARTInit( void )
-{
-        UART0_BAUDDIV = 16;
-        UART0_CTRL = 1;
-}
-/*-----------------------------------------------------------*/
-#endif /* _WIN32 */
 

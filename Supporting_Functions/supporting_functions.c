@@ -91,17 +91,16 @@
  * provided in the book text.
  */
 
-/* Standard includes. */
-#include <stdio.h>
-#ifdef _WIN32
-#include <conio.h>
-#else
-int _kbhit(void) {}
-#endif /* _WIN32 */
 
 /* FreeRTOS includes. */
 #include "FreeRTOS.h"
 #include "task.h"
+
+/* Standard includes. */
+#include <stdio.h>
+
+#ifdef _WIN32
+#include <conio.h>
 
 /* If this variable is true then pressing a key will end the application.  Some
 examples set this to pdFALSE to allow key presses to be used by the
@@ -180,6 +179,7 @@ void vPrintTwoStrings( const char *pcString1, const char *pcString2 )
 	}
 }
 /*-----------------------------------------------------------*/
+#endif /* _WIN32 */
 
 void vApplicationMallocFailedHook( void )
 {

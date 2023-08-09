@@ -83,7 +83,7 @@
 #define configMAX_PRIORITIES					5
 #define configUSE_IDLE_HOOK						0
 #define configUSE_TICK_HOOK						0
-#define configTICK_RATE_HZ						( 1000 ) /* This is a simulated environment and therefore not real-time. */
+#define configTICK_RATE_HZ						( 100 ) /* This is a simulated environment and therefore not real-time. */
 #define configMINIMAL_STACK_SIZE				( ( unsigned short ) 50 ) /* In this simulated case, the stack only has to hold one small structure as the real stack is part of the win32 thread. */
 #define configTOTAL_HEAP_SIZE					( ( size_t ) ( 20 * 1024 ) )
 #define configMAX_TASK_NAME_LEN					( 12 )
@@ -140,5 +140,13 @@ functions anyway. */
 uses the same semantics as the standard C assert() macro. */
 extern void vAssertCalled( uint32_t ulLine, const char * const pcFileName );
 #define configASSERT( x ) if( ( x ) == 0 ) vAssertCalled( __LINE__, __FILE__ )
+
+#ifndef _WIN32
+// These lines added to  example to make it compatible with MPS2-385 by @HAQ
+ /* !!!! configMAX_SYSCALL_INTERRUPT_PRIORITY must not be set to zero !!!!
+ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
+#define configMAX_SYSCALL_INTERRUPT_PRIORITY 	( 4 )
+#define configCPU_CLOCK_HZ				( ( unsigned long ) 25000000 )
+#endif /* _WIN32 */
 
 #endif /* FREERTOS_CONFIG_H */
