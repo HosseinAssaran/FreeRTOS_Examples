@@ -83,7 +83,7 @@
 #define configMAX_PRIORITIES					5
 #define configUSE_IDLE_HOOK						0
 #define configUSE_TICK_HOOK						0
-#define configTICK_RATE_HZ						( 100 ) /* This is a simulated environment and therefore not real-time. */
+#define configTICK_RATE_HZ						( 1000 ) /* This is a simulated environment and therefore not real-time. */
 #define configMINIMAL_STACK_SIZE				( ( unsigned short ) 50 ) /* In this simulated case, the stack only has to hold one small structure as the real stack is part of the win32 thread. */
 #define configTOTAL_HEAP_SIZE					( ( size_t ) ( 20 * 1024 ) )
 #define configMAX_TASK_NAME_LEN					( 12 )

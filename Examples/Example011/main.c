@@ -60,6 +60,8 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
+
 
 /* The tasks to be created.  Two instances are created of the sender task while
 only a single instance is created of the receiver task. */
@@ -94,6 +96,8 @@ static const Data_t xStructsToSend[ 2 ] =
 
 int main( void )
 {
+	HwInit();
+
     /* The queue is created to hold a maximum of 3 structures of type Data_t. */
     xQueue = xQueueCreate( 3, sizeof( Data_t ) );
 

@@ -179,6 +179,12 @@ void vPrintTwoStrings( const char *pcString1, const char *pcString2 )
 	}
 }
 /*-----------------------------------------------------------*/
+#else
+void vPrintString( const char *pcString ) {
+	taskENTER_CRITICAL();
+	printf(pcString);
+	taskEXIT_CRITICAL();
+}
 #endif /* _WIN32 */
 
 void vApplicationMallocFailedHook( void )

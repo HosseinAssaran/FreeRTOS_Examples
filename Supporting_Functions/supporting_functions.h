@@ -70,9 +70,9 @@ void vPrintString( const char *pcString );
 void vPrintStringAndNumber( const char *pcString, uint32_t ulValue );
 void vPrintTwoStrings( const char *pcString1, const char *pcString2 );
 #else
-static inline void vPrintString( const char *pcString ) { printf(pcString); }
-static inline void vPrintStringAndNumber( const char *pcString, uint32_t ulValue ){ printf( "%s %lu\r\n", pcString, ulValue ); }
-static inline void vPrintTwoStrings( const char *pcString1, const char *pcString2 ){ printf( "At time %lu: %s %s\r\n", xTaskGetTickCount(), pcString1, pcString2 ); }
+void vPrintString( const char *pcString );
+void vPrintStringAndNumber( const char *pcString, uint32_t ulValue ){ printf( "%s %d\r\n", pcString, ulValue ); }
+static inline void vPrintTwoStrings( const char *pcString1, const char *pcString2 ){ printf( "At time %u: %s %s\r\n", xTaskGetTickCount(), pcString1, pcString2 ); }
 #endif /* _WIN32 */
 
 #endif

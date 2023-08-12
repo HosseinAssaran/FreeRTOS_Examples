@@ -60,14 +60,16 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
+
 
 /* The three sender task. */
-void vSenderTask1( void *pvParameters );
-void vSenderTask2( void *pvParameters );
+static void vSenderTask1( void *pvParameters );
+static void vSenderTask2( void *pvParameters );
 
 /* The receiver task.  The receiver blocks on the queue set to received data
 from both sender task. */
-void vReceiverTask( void *pvParameters );
+static void vReceiverTask( void *pvParameters );
 
 /*-----------------------------------------------------------*/
 
@@ -81,6 +83,8 @@ static QueueSetHandle_t xQueueSet = NULL;
 
 int main( void )
 {
+	HwInit();
+
 	/* Create the two queues.  Each queue sends character pointers.  The
 	priority of the receiving task is above the priority of the sending tasks so
 	the queues will never have more than one item in them at any one time. */

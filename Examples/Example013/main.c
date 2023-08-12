@@ -60,6 +60,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 /* The periods assigned to the one-shot and auto-reload timers respectively. */
 #define mainONE_SHOT_TIMER_PERIOD		( pdMS_TO_TICKS( 3333UL ) )
@@ -78,8 +79,10 @@ static void prvAutoReloadTimerCallback( TimerHandle_t xTimer );
 
 int main( void )
 {
-TimerHandle_t xAutoReloadTimer, xOneShotTimer;
-BaseType_t xTimer1Started, xTimer2Started;
+	HwInit();
+
+	TimerHandle_t xAutoReloadTimer, xOneShotTimer;
+	BaseType_t xTimer1Started, xTimer2Started;
 
 	/* Create the one shot software timer, storing the handle to the created
 	software timer in xOneShotTimer. */

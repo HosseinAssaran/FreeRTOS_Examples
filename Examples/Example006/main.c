@@ -118,7 +118,7 @@ char *pcTaskName;
 void vPeriodicTask( void *pvParameters )
 {
 TickType_t xLastWakeTime;
-const TickType_t xDelay5ms = pdMS_TO_TICKS( 3UL );
+const TickType_t xDelay5ms = pdMS_TO_TICKS( 10UL );
 
 	/* The xLastWakeTime variable needs to be initialized with the current tick
 	count.  Note that this is the only time we access this variable.  From this

@@ -59,6 +59,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 /* The task function. */
 void vTaskFunction( void *pvParameters );
@@ -76,6 +77,8 @@ const char *pcTextForTask2 = "Task 2 is running\r\n";
 
 int main( void )
 {
+	HwInit();
+
 	/* Create the first task at priority 1... */
 	xTaskCreate( vTaskFunction, "Task 1", 1000, (void*)pcTextForTask1, 1, NULL );
 

@@ -60,6 +60,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 
 /* The tasks to be created.  Two instances are created of the sender task while
@@ -76,6 +77,8 @@ QueueHandle_t xQueue;
 
 int main( void )
 {
+	HwInit();
+
     /* The queue is created to hold a maximum of 5 long values. */
     xQueue = xQueueCreate( 5, sizeof( int32_t ) );
 
@@ -130,15 +133,15 @@ BaseType_t xStatus;
 
 		The second parameter is the address of the data to be sent.
 
-		The third parameter is the Block time – the time the task should be kept
+		The third parameter is the Block time ï¿½ the time the task should be kept
 		in the Blocked state to wait for space to become available on the queue
-		should the queue already be full.  In this case we don’t specify a block
+		should the queue already be full.  In this case we donï¿½t specify a block
 		time because there should always be space in the queue. */
 		xStatus = xQueueSendToBack( xQueue, &lValueToSend, 0 );
 
 		if( xStatus != pdPASS )
 		{
-			/* We could not write to the queue because it was full – this must
+			/* We could not write to the queue because it was full ï¿½ this must
 			be an error as the queue should never contain more than one item! */
 			vPrintString( "Could not send to the queue.\r\n" );
 		}
@@ -171,7 +174,7 @@ const TickType_t xTicksToWait = pdMS_TO_TICKS( 100UL );
 		placed.  In this case the buffer is simply the address of a variable that
 		has the required size to hold the received data.
 
-		the last parameter is the block time – the maximum amount of time that the
+		the last parameter is the block time ï¿½ the maximum amount of time that the
 		task should remain in the Blocked state to wait for data to be available should
 		the queue already be empty. */
 		xStatus = xQueueReceive( xQueue, &lReceivedValue, xTicksToWait );

@@ -59,6 +59,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 /* The two task functions. */
 void vTask1( void *pvParameters );
@@ -71,6 +72,8 @@ TaskHandle_t xTask2Handle;
 
 int main( void )
 {
+	HwInit();
+
 	/* Create the first task at priority 1.  This time the task parameter is
 	not used and is set to NULL.  The task handle is also not used so likewise 
 	is also set to NULL. */
