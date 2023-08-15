@@ -21,4 +21,4 @@ Copyright (c) 2003-2022 Fabrice Bellard and the QEMU Project developers
 2. Run `make`
 
 ## How to run simulator
-`qemu-system-arm "--machine" "mps2-an385" "--cpu" "cortex-m3" "--kernel" "output/RTOSDemo.out" -serial stdio -monitor none -nographic`
+`qemu-system-arm "--machine" "mps2-an385" "--cpu" "cortex-m3" "--kernel" "output/RTOSDemo.out" -monitor none -nographic -serial stdio`

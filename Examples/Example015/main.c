@@ -54,7 +54,9 @@
 */
 
 /* Standard includes. */
+#ifdef _WIN32
 #include <conio.h>
+#endif /* _WIN32 */
 
 /* FreeRTOS.org includes. */
 #include "FreeRTOS.h"
@@ -63,6 +65,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 /* The periods assigned to the one-shot timer. */
 #define mainBACKLIGHT_TIMER_PERIOD		( pdMS_TO_TICKS( 5000UL ) )
@@ -97,6 +100,8 @@ static TimerHandle_t xBacklightTimer = NULL;
 
 int main( void )
 {
+	HwInit();
+
 	/* The backlight is off at the start. */
 	xSimulatedBacklightOn = pdFALSE;
 
@@ -143,13 +148,15 @@ TickType_t xTimeNow = xTaskGetTickCount();
 
 static void vKeyHitTask( void *pvParameters )
 {
-const TickType_t xShortDelay = pdMS_TO_TICKS( 50 );
-extern BaseType_t xKeyPressesStopApplication;
-TickType_t xTimeNow;
-
+const TickType_t xShortDelay = pdMS_TO_TICKS( 100 );
+#ifdef _WIN32
+	extern BaseType_t xKeyPressesStopApplication;
 	/* This example uses key presses, so prevent key presses being used to end
 	the application. */
 	xKeyPressesStopApplication = pdFALSE;
+#endif /* _WIN32 */
+
+	TickType_t xTimeNow;
 
 	vPrintString( "Press a key to turn the backlight on.\r\n" );
 
@@ -189,7 +196,10 @@ TickType_t xTimeNow;
 			read key presses in an interrupt.  If this function was an interrupt
 			service routine then xTimerResetFromISR() must be used instead of
 			xTimerReset(). */
-			xTimerReset( xBacklightTimer, xShortDelay );
+			BaseType_t xTimerState = xTimerReset( xBacklightTimer, xShortDelay );
+			if(xTimerState == pdFALSE){
+				vPrintString("Failed to reset timer.\n");
+			}
 
 			/* Read and discard the key that was pressed. */
 			( void ) _getch();
