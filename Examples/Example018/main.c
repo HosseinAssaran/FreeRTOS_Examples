@@ -70,6 +70,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 
 /* The number of the simulated interrupt used in this example.  Numbers 0 to 2
@@ -86,12 +87,14 @@ static void vDeferredHandlingFunction( void *pvParameter1, uint32_t ulParameter2
 
 /* The service routine for the (simulated) interrupt.  This is the interrupt
 that the task will be synchronized with. */
-static uint32_t ulExampleInterruptHandler( void );
+uint32_t ulExampleInterruptHandler( void );
 
 /*-----------------------------------------------------------*/
 
 int main( void )
 {
+	HwInit();
+
 /* The task that generates the software interrupt is created at a priority
 below the priority of the daemon task.  The priority of the daemon task is
 set by the configTIMER_TASK_PRIORITY compile time configuration constant in
@@ -146,7 +149,7 @@ const TickType_t xDelay500ms = pdMS_TO_TICKS( 500UL );
 }
 /*-----------------------------------------------------------*/
 
-static uint32_t ulExampleInterruptHandler( void )
+uint32_t ulExampleInterruptHandler( void )
 {
 static uint32_t ulParameterValue = 0;
 BaseType_t xHigherPriorityTaskWoken;
