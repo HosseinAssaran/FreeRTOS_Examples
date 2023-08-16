@@ -181,9 +181,9 @@ void vPrintTwoStrings( const char *pcString1, const char *pcString2 )
 /*-----------------------------------------------------------*/
 #else
 void vPrintString( const char *pcString ) {
-	taskENTER_CRITICAL();
+	UBaseType_t uxSavedStatusValue = taskENTER_CRITICAL_FROM_ISR();
 	printf(pcString);
-	taskEXIT_CRITICAL();
+	taskEXIT_CRITICAL_FROM_ISR(uxSavedStatusValue);
 }
 #endif /* _WIN32 */
 
