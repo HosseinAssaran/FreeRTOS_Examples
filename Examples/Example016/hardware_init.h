@@ -62,7 +62,7 @@ static char uart0_getchar() {
 
 void vPortGenerateSimulatedInterrupt( uint32_t ulInterruptNumber) {
 	 //NVIC_SetPendingIRQ(ulInterruptNumber);
-	 SCB->SCR |= 16;
+	 SCB->SCR |= SCB_SCR_SEVONPEND_Msk;
 	 NVIC->STIR |= ulInterruptNumber;
  }
 
