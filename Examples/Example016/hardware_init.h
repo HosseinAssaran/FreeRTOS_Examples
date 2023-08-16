@@ -1,8 +1,9 @@
 
-#include "SMM_MPS2.h"
 
 
 #ifndef _WIN32
+#include "SMM_MPS2.h"
+
 /* printf() output uses the UART.  These constants define the addresses of the
 required UART registers. */
 #define UART0_ADDRESS   ( 0x40004000UL )
