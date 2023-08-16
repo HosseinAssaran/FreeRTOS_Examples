@@ -70,6 +70,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 
 /* The number of the simulated interrupt used in this example.  Numbers 0 to 2
@@ -83,7 +84,7 @@ static void vPeriodicTask( void *pvParameters );
 
 /* The service routine for the (simulated) interrupt.  This is the interrupt
 that the task will be synchronized with. */
-static uint32_t ulExampleInterruptHandler( void );
+uint32_t ulExampleInterruptHandler( void );
 
 /*-----------------------------------------------------------*/
 
@@ -94,6 +95,8 @@ SemaphoreHandle_t xCountingSemaphore;
 
 int main( void )
 {
+	HwInit();
+
     /* Before a semaphore is used it must be explicitly created.  In this
 	example a counting semaphore is created.  The semaphore is created to have a
 	maximum count value of 10, and an initial count value of 0. */
@@ -179,7 +182,7 @@ const TickType_t xDelay500ms = pdMS_TO_TICKS( 500UL );
 }
 /*-----------------------------------------------------------*/
 
-static uint32_t ulExampleInterruptHandler( void )
+uint32_t ulExampleInterruptHandler( void )
 {
 BaseType_t xHigherPriorityTaskWoken;
 
