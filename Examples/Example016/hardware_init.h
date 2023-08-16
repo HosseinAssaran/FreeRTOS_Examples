@@ -44,9 +44,10 @@ static char uart0_getchar() {
 	printf("char : %c\n", ch);
  }
 
- void vPortSetInterruptHandler( uint32_t ulInterruptNumber, __attribute__((unused)) uint32_t (*pvHandler)( void ) ) {
-
-	//No need to add to vector because it is hard coded in isr_vector in startup_gcc
+ void vPortSetInterruptHandler( uint32_t ulInterruptNumber,
+		 __attribute__((unused)) uint32_t (*pvHandler)( void ) ) {
+	    /* No need to add pvHandler dynamically because it is hard coded
+	 	 in isr_vector in startup_gcc. It use in MSVC implementation.*/
 
 	//ensure proper priority grouping for freeRTOS
 	NVIC_SetPriorityGrouping(0);
