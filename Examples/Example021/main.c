@@ -65,7 +65,11 @@
 
 /* Standard includes. */
 #include <stdio.h>
+#ifdef _WIN32
 #include <conio.h>
+#else
+#include <stdlib.h>
+#endif /* _WIN32 */
 
 /* FreeRTOS.org includes. */
 #include "FreeRTOS.h"
@@ -74,6 +78,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 /* The task that sends messages to the stdio gatekeeper.  Two instances of this
 task are created. */
@@ -102,6 +107,8 @@ const TickType_t xMaxBlockTimeTicks = 0x20;
 
 int main( void )
 {
+	HwInit();
+
     /* Before a queue is used it must be explicitly created.  The queue is created
 	to hold a maximum of 5 character pointers. */
     xPrintQueue = xQueueCreate( 5, sizeof( char * ) );
