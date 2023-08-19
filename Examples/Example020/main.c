@@ -65,7 +65,11 @@
 
 /* Standard includes. */
 #include <stdio.h>
+#ifdef _WIN32
 #include <conio.h>
+#else
+#include <stdlib.h>
+#endif /* _WIN32 */
 
 /* FreeRTOS.org includes. */
 #include "FreeRTOS.h"
@@ -74,6 +78,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 /* The task to be created.  Two instances of this task are created. */
 static void prvPrintTask( void *pvParameters );
@@ -92,6 +97,8 @@ const TickType_t xMaxBlockTimeTicks = 0x20;
 
 int main( void )
 {
+	HwInit();
+
     /* Before a semaphore is used it must be explicitly created.  In this example
 	a mutex type semaphore is created. */
     xMutex = xSemaphoreCreateMutex();
