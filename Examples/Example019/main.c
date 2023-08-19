@@ -70,6 +70,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 /* The number of the simulated interrupt used in this example.  Numbers 0 to 2
 are used by the FreeRTOS Windows port itself, so 3 is the first number available
@@ -82,7 +83,7 @@ static void vStringPrinter( void *pvParameters );
 
 /* The service routine for the (simulated) interrupt.  This is the interrupt
 that the task will be synchronized with. */
-static uint32_t ulExampleInterruptHandler( void );
+uint32_t ulExampleInterruptHandler( void );
 
 /*-----------------------------------------------------------*/
 
@@ -92,6 +93,8 @@ QueueHandle_t xIntegerQueue, xStringQueue;
 
 int main( void )
 {
+	HwInit();
+
     /* Before a queue can be used it must first be created.  Create both queues
 	used by this example.  One queue can hold variables of type uint32_t,
 	the other queue can hold variables of type char*.  Both queues can hold a
@@ -180,7 +183,7 @@ char *pcString;
 }
 /*-----------------------------------------------------------*/
 
-static uint32_t ulExampleInterruptHandler( void )
+uint32_t ulExampleInterruptHandler( void )
 {
 BaseType_t xHigherPriorityTaskWoken;
 uint32_t ulReceivedNumber;
