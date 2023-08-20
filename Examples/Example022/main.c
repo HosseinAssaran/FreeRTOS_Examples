@@ -62,6 +62,8 @@
 
     1 tab == 4 spaces!
 */
+/* Standard Library */
+#include <stdlib.h>
 
 /* FreeRTOS.org includes. */
 #include "FreeRTOS.h"
@@ -71,6 +73,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 /* The number of the simulated interrupt used in this example.  Numbers 0 to 2
 are used by the FreeRTOS Windows port itself, so 3 is the first number available
@@ -93,7 +96,7 @@ void vPrintStringFromDaemonTask( void *pvParameter1, uint32_t ulParameter2 );
 
 /* The service routine for the (simulated) interrupt.  This is the interrupt
 that sets an event bit in the event group. */
-static uint32_t ulEventBitSettingISR( void );
+uint32_t ulEventBitSettingISR( void );
 
 /*-----------------------------------------------------------*/
 
@@ -102,6 +105,8 @@ EventGroupHandle_t xEventGroup;
 
 int main( void )
 {
+	HwInit();
+
 	/* Before an event group can be used it must first be created. */
 	xEventGroup = xEventGroupCreate();
 
@@ -160,7 +165,7 @@ const TickType_t xDelay200ms = pdMS_TO_TICKS( 200UL ), xDontBlock = 0;
 }
 /*-----------------------------------------------------------*/
 
-static uint32_t ulEventBitSettingISR( void )
+uint32_t ulEventBitSettingISR( void )
 {
 BaseType_t xHigherPriorityTaskWoken;
 /* The string is not printed within the interrupt service, but is instead
@@ -271,11 +276,5 @@ const TickType_t xDelay500ms = pdMS_TO_TICKS( 500UL );
 		vPortGenerateSimulatedInterrupt( mainINTERRUPT_NUMBER );
 	}
 }
-
-
-
-
-
-
 
 

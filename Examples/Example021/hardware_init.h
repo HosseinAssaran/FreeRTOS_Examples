@@ -33,11 +33,6 @@ static int _kbhit(void){
 }
 // Function to receive a character from UART0
 static char uart0_getchar() {
-//	const TickType_t xShortDelay = pdMS_TO_TICKS( 50 );
-//    while (!(UART0_STATE & UARTn_RX_FULL)) {
-//        // Wait until Receive FIFO is not empty
-//		vTaskDelay( xShortDelay );
-//    }
     return (char)(UART0_DATA & 0xFF); // Read the received character from DATA register
 }
  void test_getchar()
