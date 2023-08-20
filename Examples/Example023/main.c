@@ -73,6 +73,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 /* Definitions for the event bits in the event group. */
 #define mainFIRST_TASK_BIT	( 1UL << 0UL ) /* Event bit 0, which is set by the first task. */
@@ -97,6 +98,8 @@ EventGroupHandle_t xEventGroup;
 
 int main( void )
 {
+	HwInit();
+
 	/* The tasks created in this example block for a random time.  The block
 	time is generated using rand() - seed the random number generator. */
 	prvSRand( ( uint32_t ) time( NULL ) );
