@@ -142,4 +142,12 @@ uses the same semantics as the standard C assert() macro. */
 extern void vAssertCalled( uint32_t ulLine, const char * const pcFileName );
 #define configASSERT( x ) if( ( x ) == 0 ) vAssertCalled( __LINE__, __FILE__ )
 
+#ifndef _WIN32
+// These lines added to  example to make it compatible with MPS2-385 by @HAQ
+ /* !!!! configMAX_SYSCALL_INTERRUPT_PRIORITY must not be set to zero !!!!
+ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
+#define configMAX_SYSCALL_INTERRUPT_PRIORITY 	( 4 )
+#define configCPU_CLOCK_HZ				( ( unsigned long ) 25000000 )
+#endif /* _WIN32 */
+
 #endif /* FREERTOS_CONFIG_H */

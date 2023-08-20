@@ -70,6 +70,7 @@
 
 /* Demo includes. */
 #include "supporting_functions.h"
+#include "hardware_init.h"
 
 /* The number of the simulated interrupt used in this example.  Numbers 0 to 2
 are used by the FreeRTOS Windows port itself, so 3 is the first number available
@@ -82,7 +83,7 @@ static void vPeriodicTask( void *pvParameters );
 
 /* The service routine for the (simulated) interrupt.  This is the interrupt
 that the task will be synchronized with. */
-static uint32_t ulExampleInterruptHandler( void );
+uint32_t ulExampleInterruptHandler( void );
 
 /* The rate at which the periodic task generates software interrupts. */
 static const TickType_t xInterruptFrequency = pdMS_TO_TICKS( 500UL );
@@ -94,6 +95,8 @@ static TaskHandle_t xHandlerTask = NULL;
 
 int main( void )
 {
+	HwInit();
+
 	/* Create the 'handler' task, which is the task to which interrupt
 	processing is deferred, and so is the task that will be synchronized
 	with the interrupt.  The handler task is created with a high priority to
@@ -159,7 +162,7 @@ uint32_t ulEventsToProcess;
 }
 /*-----------------------------------------------------------*/
 
-static uint32_t ulExampleInterruptHandler( void )
+uint32_t ulExampleInterruptHandler( void )
 {
 BaseType_t xHigherPriorityTaskWoken;
 
