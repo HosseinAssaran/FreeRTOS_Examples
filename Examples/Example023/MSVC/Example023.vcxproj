@@ -86,7 +86,6 @@
     <ClCompile Include="..\..\..\FreeRTOS_Source\portable\MSVC-MingW\port.c" />
     <ClCompile Include="..\..\..\FreeRTOS_Source\queue.c" />
     <ClCompile Include="..\..\..\FreeRTOS_Source\tasks.c" />
-    <ClCompile Include="..\..\..\FreeRTOS_Source\timers.c" />
     <ClCompile Include="..\..\..\Supporting_Functions\supporting_functions.c" />
     <ClCompile Include="..\main.c" />
   </ItemGroup>

@@ -44,9 +44,6 @@
     <ClCompile Include="..\..\..\FreeRTOS_Source\event_groups.c">
       <Filter>Source Files\FreeRTOS_Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\FreeRTOS_Source\timers.c">
-      <Filter>Source Files\FreeRTOS_Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\FreeRTOS_Source\include\semphr.h">
