@@ -30,4 +30,16 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>FreeRTOS_Source</name>
+			<type>2</type>
+			<location>/home/hossein/gcc_Win32MSVC_simulator/FreeRTOS_Source</location>
+		</link>
+		<link>
+			<name>Supporting_Functions</name>
+			<type>2</type>
+			<location>/home/hossein/gcc_Win32MSVC_simulator/Supporting_Functions</location>
+		</link>
+	</linkedResources>
 </projectDescription>
