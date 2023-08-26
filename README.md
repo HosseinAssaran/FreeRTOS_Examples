@@ -60,4 +60,11 @@ Follow these steps to compile the examples:
 until recieved new key press within timeout.Polling method is used in 
 the example 015 which increases cpu overhead.</p>
 <p> In this example, we have used interrupt service routin for reading data from uart
-instead of polling to decrease cpu overhead </p>
+instead of polling to decrease cpu overhead.</p>
+
+### Exmpale 027
+<p> It echo each character you send to uart0 using interrupt and queue.</p>
+
+### Exmpale 028
+<p> Each time it wait for 16 characters to be typed with 10 seconds timeout.
+It uses buffer instead of queue.</p>

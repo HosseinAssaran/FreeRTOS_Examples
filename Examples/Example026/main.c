@@ -93,7 +93,8 @@ static BaseType_t xSimulatedBacklightOn = pdFALSE;
 /* The software timer used to turn the backlight off. */
 static TimerHandle_t xBacklightTimer = NULL;
 
-static TimerHandle_t vKeyHitTaskHandler = NULL;
+/* Used to hold the handle of KeyHitTaskHandler. */
+static TaskHandle_t vKeyHitTaskHandler = NULL;
 
 /*-----------------------------------------------------------*/
 
