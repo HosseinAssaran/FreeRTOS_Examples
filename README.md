@@ -51,3 +51,13 @@ Follow these steps to compile the examples:
 `qemu-system-arm "--machine" "mps2-an385" "--cpu" "cortex-m3" "--kernel" "output/RTOSDemo.out" -monitor none -nographic -serial stdio`
 
 <p>Feel free to explore and experiment with these examples. If you encounter any issues or have improvements to suggest, please contribute to the project or submit a pull request. Your involvement is pivotal in making this repository a valuable resource for the FreeRTOS community.</p>
+
+## New Examples
+<p> In this part, I explain about new exmpales I add to this project </p>
+
+### Exmpale 026
+<p> It has the same functionality of example 015. and try to keep back light on 
+until recieved new key press within timeout.Polling method is used in 
+the example 015 which increases cpu overhead.</p>
+<p> In this example, we have used interrupt service routin for reading data from uart
+instead of polling to decrease cpu overhead </p>
