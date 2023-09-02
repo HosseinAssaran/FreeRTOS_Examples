@@ -63,8 +63,15 @@ the example 015 which increases cpu overhead.</p>
 instead of polling to decrease cpu overhead.</p>
 
 ### Exmpale 027
-<p> It echo each character you send to uart0 using interrupt and queue.</p>
+<p> It echos each character you send to uart0 using interrupt and queue.</p>
 
 ### Exmpale 028
-<p> Each time it wait for 16 characters to be typed with 10 seconds timeout.
+<p> Each time, it waits for 16 characters to be typed with 10 seconds timeout.
 It uses buffer instead of queue.</p>
+
+### Exmpale 029
+<p> Each time, it waits for stream buffer filled with at least 10 characters 
+with 10 seconds timeout. It shows using stream buffer which is filled with interrupt.</p>
+
+### Exmpale 030
+<p> Using CMSIS-RTOS as a wrapper for running FreeRTOS.</p>
