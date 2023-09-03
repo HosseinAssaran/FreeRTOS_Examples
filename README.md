@@ -78,3 +78,12 @@ with 10 seconds timeout. It shows using stream buffer which is filled with inter
 
 ### Exmpale 031
 <p> Using FreeRTOS-POSIX as a wrapper for running FreeRTOS.</p>
+
+### Exmpale 032
+<p> Using heap 1 for memory management and try to delete task created by heap.</p>
+
+### Exmpale 033
+<p> Using heap 1 for memory management and try to delete task created statically.</p>
+
+### Exmpale 034
+<p> Using heap 1 for memory management and try to build a queue statically.</p>
