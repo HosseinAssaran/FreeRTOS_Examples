@@ -52,6 +52,86 @@ Follow these steps to compile the examples:
 
 <p>Feel free to explore and experiment with these examples. If you encounter any issues or have improvements to suggest, please contribute to the project or submit a pull request. Your involvement is pivotal in making this repository a valuable resource for the FreeRTOS community.</p>
 
+## Book Examples
+<p> In this part, I explain about what each book exmpale do.</p>
+
+### Exmpale 01
+<p> Creating tasks. Running two task at the same priority level having diffrent task functions.</p>
+
+### Exmpale 02
+<p> Using the task parameter. Running two task at the same priority level sharing the same task function.</p>
+
+### Exmpale 03
+<p> Experimenting with priorities.</p>
+
+### Exmpale 04
+<p> Using the Blocked state to create a delay.</p>
+
+### Exmpale 05
+<p> Converting the example tasks to use vTaskDelayUntil().</p>
+
+### Exmpale 06
+<p> Combining blocking and non-blocking tasks.</p>
+
+### Exmpale 07
+<p> Defining an idle task hook function.</p>
+
+### Exmpale 08
+<p> Changing task priorities.</p>
+
+### Exmpale 09
+<p> Deleting tasks.</p>
+
+### Exmpale 10
+<p> Blocking when receiving from a queue.</p>
+
+### Exmpale 11
+<p> Blocking when sending to a queue, and sending structures on a queue.</p>
+
+### Exmpale 12
+<p> Using a Queue Set.</p>
+
+### Exmpale 13
+<p> Creating one-shot and auto-reload timers.</p>
+
+### Exmpale 14
+<p> Using the callback function parameter and the software timer ID.</p>
+
+### Exmpale 15
+<p> Resetting a software timer.</p>
+
+### Exmpale 16
+<p> Using a binary semaphore to synchronize a task with an interrupt.</p>
+
+### Exmpale 17
+<p> Using a counting semaphore to synchronize a task with an interrupt.</p>
+
+### Exmpale 18
+<p> Centralized deferred interrupt processing.</p>
+
+### Exmpale 19
+<p> Sending and receiving on a queue from within an interrupt.</p>
+
+### Exmpale 20
+<p> Rewriting vPrintString() to use a semaphore.</p>
+
+### Exmpale 21
+<p> Re-writing vPrintString() to use a gatekeeper task.</p>
+
+### Exmpale 22
+<p> Experimenting with event groups.</p>
+
+### Exmpale 23
+<p> Synchronizing tasks.</p>
+
+### Exmpale 24
+<p> Using a task notification in place of a semaphore, method 1.</p>
+
+### Exmpale 25
+<p> Using a task notification in place of a semaphore, method 2.</p>
+
+----------------
+
 ## New Examples
 <p> In this part, I explain about new exmpales I add to this project </p>
 
