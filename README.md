@@ -53,7 +53,7 @@ Follow these steps to compile the examples:
 <p>Feel free to explore and experiment with these examples. If you encounter any issues or have improvements to suggest, please contribute to the project or submit a pull request. Your involvement is pivotal in making this repository a valuable resource for the FreeRTOS community.</p>
 
 ## Book Examples
-<p> In this part, I explain about what each book exmpale do.</p>
+<p> In this part, I explain about what each book example does.</p>
 
 ### Exmpale 01
 <p> Creating tasks. Running two task at the same priority level having diffrent task functions.</p>
@@ -167,3 +167,18 @@ with 10 seconds timeout. It shows using stream buffer which is filled with inter
 
 ### Exmpale 034
 <p> Using heap 1 for memory management and try to build a queue statically.</p>
+
+### Exmpale 035
+<p> Developing an abstract layer by using an LED interface and initilize leds 
+to turn on and off repeatedly.</p>
+
+You can modify and add what implementaion you want in `ledImplementation.c`
+
+### Exmpale 036
+<p> Get data from uart and actuate it on LEDs. It shows abstraction and loosly coupled code. 
+I can suceeded to see the result by the simulator.</p>
+
+You can modify and add what implementaion you want in `pwmImplementation.c`
+
+
+

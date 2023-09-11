@@ -65,6 +65,7 @@
 
 #ifndef BASIC_IO_H
 #define BASIC_IO_H
+#include <stdint.h>
 #ifdef _WIN32
 void vPrintString( const char *pcString );
 void vPrintStringAndNumber( const char *pcString, uint32_t ulValue );
@@ -72,7 +73,7 @@ void vPrintTwoStrings( const char *pcString1, const char *pcString2 );
 #else
 void vPrintString( const char *pcString );
 void vPrintStringAndNumber( const char *pcString, uint32_t ulValue ){ printf( "%s %d\r\n", pcString, ulValue ); }
-static inline void vPrintTwoStrings( const char *pcString1, const char *pcString2 ){ printf( "At time %u: %s %s\r\n", xTaskGetTickCount(), pcString1, pcString2 ); }
+static inline void vPrintTwoStrings( const char *pcString1, const char *pcString2 ){ printf( "At time %d: %s %s\r\n", xTaskGetTickCount(), pcString1, pcString2 ); }
 #endif /* _WIN32 */
 
 #endif
