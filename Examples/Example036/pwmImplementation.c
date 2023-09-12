@@ -22,19 +22,19 @@ void PWMInit( void )
 
 void SetBlueDuty( float DutyCycle )
 {
-	printf("--SetBlueDuty to %f.\n", DutyCycle);
+	printf("--SetBlueDuty to %d.\n", (int) DutyCycle);
 
 }
 iPWM BluePWM = {.SetDutyCycle = SetBlueDuty};
 
 void SetGreenDuty( float DutyCycle )
 {
-	printf("--SetGreenDuty to %f.\n", DutyCycle);
+	printf("--SetGreenDuty to %d.\n", (int) DutyCycle);
 }
 iPWM GreenPWM = {.SetDutyCycle = SetGreenDuty};
 
 void SetRedDuty( float DutyCycle )
 {
-	printf("--SetRedDuty to %f.\n", DutyCycle);
+	printf("--SetRedDuty to %d.\n", (int) DutyCycle);
 }
 iPWM RedPWM = {.SetDutyCycle = SetRedDuty};

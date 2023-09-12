@@ -77,7 +77,7 @@
 #include "supporting_functions.h"
 #include "hardware_init.h"
 
-
+static void vKeyHitTask( void *pvParameters );
 
 
 // some common variables to use for each task
@@ -129,6 +129,7 @@ int main(void)
 	//setup tasks, making sure they have been properly created before moving on
 	configASSERT(xTaskCreate(frameDecoder, "frameDecoder", 256, NULL, configMAX_PRIORITIES-2, NULL) == pdPASS);
 	configASSERT(xTaskCreate(LedCmdExecution, "cmdExec", 256, &ledTaskArgs, configMAX_PRIORITIES-2, NULL) == pdPASS);
+	xTaskCreate( vKeyHitTask, "Key poll", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL );
 
 	//start the scheduler - shouldn't return unless there's a problem
 	vTaskStartScheduler();
@@ -136,6 +137,30 @@ int main(void)
 	//if you've wound up here, there is likely an issue with overrunning the freeRTOS heap
 	while(1)
 	{
+	}
+}
+
+
+static void vKeyHitTask( void *pvParameters )
+{
+const TickType_t xShortDelay = pdMS_TO_TICKS( 100 );
+
+	/* A real application, running on a real target, would probably read button
+	pushes in an interrupt.  That allows the application to be event driven, and
+	prevents CPU time being wasted by polling for key presses when no keys have
+	been pressed.  It is not practical to use real interrupts when using the
+	FreeRTOS Windows port, so this task is created to instead provide the key
+	reading functionality by simply polling the keyboard. */
+	for( ;; )
+	{
+		/* Has a key been pressed? */
+		if( _kbhit() != 0 )
+		{
+			/* Read and discard the key that was pressed. */
+			printf("%x \n", _getch());
+		}
+		/* Don't poll too quickly. */
+		vTaskDelay( xShortDelay );
 	}
 }
 
@@ -180,7 +205,7 @@ void frameDecoder( void* NotUsed)
 									frame,
 									1,
 									portMAX_DELAY);
-			printf("get %x\n", frame[0]);
+			printf("\n get %x", frame[0]);
 		}
 
 		//now receive the rest of the frame (hopefully)
@@ -189,7 +214,7 @@ void frameDecoder( void* NotUsed)
 								&frame[1],
 								FRAME_LEN-1,
 								portMAX_DELAY);
-		for(int i = 1 ; i < FRAME_LEN-1; i++)
+		for(int i = 1 ; i < FRAME_LEN; i++)
 			printf(" %x ", frame[i]);
 		printf("\n");
 

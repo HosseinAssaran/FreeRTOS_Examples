@@ -14,7 +14,7 @@ static void enable_uart0_interrupt(void);
 
 static void HwInit(void){
 	prvUARTInit();
-	enable_uart0_interrupt();
+	//enable_uart0_interrupt();
 }
 static void prvUARTInit( void )
 {

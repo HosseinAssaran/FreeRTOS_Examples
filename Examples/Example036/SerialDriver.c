@@ -91,6 +91,16 @@ uint32_t UART0_RX_IRQHANDLER(void)
 	context switch is required. */
 	xHigherPriorityTaskWoken = pdFALSE;
 
+	if(CMSDK_UART0->INTSTATUS & CMSDK_UART_INTSTATUS_RXORIRQ_Msk)
+	{
+		printf("Over interrupt run %x", CMSDK_UART0->DATA);
+	}
+
+	if(CMSDK_UART0->STATE & CMSDK_UART_STATE_RXOR_Msk)
+	{
+		printf("Over run %x", CMSDK_UART0->DATA);
+	}
+
 	if(CMSDK_UART0->INTSTATUS & CMSDK_UART_INTSTATUS_RXIRQ_Msk) {
 
 		//read the data register unconditionally to clear
@@ -99,7 +109,7 @@ uint32_t UART0_RX_IRQHANDLER(void)
 		uint8_t tempVal = (uint8_t) CMSDK_UART0->DATA;
 
 		rxSendBuff[rxltr++] = tempVal;
-		printf("%d ", rxltr);
+		printf("%d %x\n", rxltr, tempVal);
 
 		if(rxltr >= xBytesToSend)
 		{
@@ -113,6 +123,7 @@ uint32_t UART0_RX_IRQHANDLER(void)
 
 		/* Clear receive interrupt status register */
 		CMSDK_UART0->INTCLEAR |= CMSDK_UART_INTSTATUS_RXIRQ_Msk;
+		CMSDK_UART0->INTCLEAR |= CMSDK_UART_INTSTATUS_RXORIRQ_Msk;
 
 	}
 	portYIELD_FROM_ISR(xHigherPriorityTaskWoken);

@@ -180,5 +180,7 @@ I can suceeded to see the result by the simulator.</p>
 
 You can modify and add what implementaion you want in `pwmImplementation.c`
 
+<p>use this command to send and get data from python to every pts it shows. </p>
 
+`qemu-system-arm "--machine" "mps2-an385" "--cpu" "cortex-m3" "--kernel" "output/RTOSDemo.out" -monitor none -nographic -chardev pty,id=char0,mux=on,logfile=serial.log,signal=off -serial chardev:char0`
 

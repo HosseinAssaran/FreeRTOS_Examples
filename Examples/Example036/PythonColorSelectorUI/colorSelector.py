@@ -2,9 +2,13 @@ from serial.tools import list_ports
 
 from serial import Serial
 from serial import SerialException
+from serial import PARITY_EVEN
+from serial import PARITY_NONE
+from serial import STOPBITS_TWO
 import PySimpleGUI as sg
 from PyCRC.CRC32 import CRC32
 from enum import IntEnum
+import time
 
 
 # define the same enums as ledCmdExecutor.h
@@ -115,7 +119,7 @@ def getSliderValues(window: sg.Window):
 def openComPort(portName: str):
     if(portName != ''):
         try:
-            ser = Serial(portName)
+            ser = Serial(portName, 115200, timeout=0, parity=PARITY_NONE, stopbits=STOPBITS_TWO) 
             return ser
         except SerialException:
             return None
@@ -153,7 +157,7 @@ def main():
 
     # wait until a valid port is selected from the dropdown
     ser = selectComPort(window)
-    ser = Serial('/dev/pts/4') 
+    ser = Serial('/dev/pts/4', 115200, timeout=0, parity=PARITY_NONE, stopbits=STOPBITS_TWO) 
     print(ser.name) 
     if ser is None:
         return
@@ -167,7 +171,19 @@ def main():
             red, green, blue = getSliderValues(window)
             setStatus(window, "%i %i %i %i" % (cmd, red, green, blue))
             cmdBytes = buildCmd(cmd, red, green, blue)
-            ser.write(cmdBytes)
+            i=0
+            for char in cmdBytes:
+                print(hex(char))
+                ser.write(cmdBytes[i:i+1])
+                i = i + 1
+                ser.flush()
+                time.sleep(0.5)
+            #for i in range(9):
+               # ser.write(cmdBytes[i:i+1][0])
+               # print(hex(cmdBytes[i:i+1][0]))
+               # ser.flush()
+                #time.sleep(0.2)
+
             setStatus(window, "sent cmd  (0x)" + cmdBytes.hex())
         elif action == 2:
             # selected COM PORT changed
