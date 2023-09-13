@@ -129,7 +129,7 @@ int main(void)
 	//setup tasks, making sure they have been properly created before moving on
 	configASSERT(xTaskCreate(frameDecoder, "frameDecoder", 256, NULL, configMAX_PRIORITIES-2, NULL) == pdPASS);
 	configASSERT(xTaskCreate(LedCmdExecution, "cmdExec", 256, &ledTaskArgs, configMAX_PRIORITIES-2, NULL) == pdPASS);
-	xTaskCreate( vKeyHitTask, "Key poll", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL );
+	//xTaskCreate( vKeyHitTask, "Key poll", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL );
 
 	//start the scheduler - shouldn't return unless there's a problem
 	vTaskStartScheduler();
@@ -141,28 +141,28 @@ int main(void)
 }
 
 
-static void vKeyHitTask( void *pvParameters )
-{
-const TickType_t xShortDelay = pdMS_TO_TICKS( 100 );
-
-	/* A real application, running on a real target, would probably read button
-	pushes in an interrupt.  That allows the application to be event driven, and
-	prevents CPU time being wasted by polling for key presses when no keys have
-	been pressed.  It is not practical to use real interrupts when using the
-	FreeRTOS Windows port, so this task is created to instead provide the key
-	reading functionality by simply polling the keyboard. */
-	for( ;; )
-	{
-		/* Has a key been pressed? */
-		if( _kbhit() != 0 )
-		{
-			/* Read and discard the key that was pressed. */
-			printf("%x \n", _getch());
-		}
-		/* Don't poll too quickly. */
-		vTaskDelay( xShortDelay );
-	}
-}
+//static void vKeyHitTask( void *pvParameters )
+//{
+//const TickType_t xShortDelay = pdMS_TO_TICKS( 100 );
+//
+//	/* A real application, running on a real target, would probably read button
+//	pushes in an interrupt.  That allows the application to be event driven, and
+//	prevents CPU time being wasted by polling for key presses when no keys have
+//	been pressed.  It is not practical to use real interrupts when using the
+//	FreeRTOS Windows port, so this task is created to instead provide the key
+//	reading functionality by simply polling the keyboard. */
+//	for( ;; )
+//	{
+//		/* Has a key been pressed? */
+//		if( _kbhit() != 0 )
+//		{
+//			/* Read and discard the key that was pressed. */
+//			printf("%x \n", _getch());
+//		}
+//		/* Don't poll too quickly. */
+//		vTaskDelay( xShortDelay );
+//	}
+//}
 
 /**
  * this task monitors the UBS port, decodes complete frames from the USB Rx StreamBuffer,

@@ -175,12 +175,15 @@ to turn on and off repeatedly.</p>
 You can modify and add what implementaion you want in `ledImplementation.c`
 
 ### Exmpale 036
-<p> Get data from uart and actuate it on LEDs. It shows abstraction and loosly coupled code. 
-I can suceeded to see the result by the simulator.</p>
+<p> Get data from uart and control leds based on the data.
+There is a python program in PythonColorSelectorUI directory which send data to the device comport.
+After running program you can see the result log in serial.log
+</p>
 
+This program shows abstraction and loosly coupled code. 
 You can modify and add what implementaion you want in `pwmImplementation.c`
 
-<p>use this command to send and get data from python to every pts it shows. </p>
+<p>Use this command to run a program in simulator with serial port connected to pty under linux. </p>
 
-`qemu-system-arm "--machine" "mps2-an385" "--cpu" "cortex-m3" "--kernel" "output/RTOSDemo.out" -monitor none -nographic -chardev pty,id=char0,mux=on,logfile=serial.log,signal=off -serial chardev:char0`
+`qemu-system-arm "--machine" "mps2-an385" "--cpu" "cortex-m3" "--kernel" "output/RTOSDemo.out" -monitor none -nographic -chardev pty,id=char0,logfile=serial.log,signal=off -serial chardev:char0`
 

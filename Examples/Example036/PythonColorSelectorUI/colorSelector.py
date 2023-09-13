@@ -2,14 +2,16 @@ from serial.tools import list_ports
 
 from serial import Serial
 from serial import SerialException
-from serial import PARITY_EVEN
-from serial import PARITY_NONE
-from serial import STOPBITS_TWO
+#from serial import PARITY_EVEN
+#from serial import PARITY_NONE
+#from serial import STOPBITS_TWO
 import PySimpleGUI as sg
 from PyCRC.CRC32 import CRC32
 from enum import IntEnum
 import time
-
+import glob
+import subprocess
+#import os
 
 # define the same enums as ledCmdExecutor.h
 class CMD_ID(IntEnum):
@@ -101,6 +103,13 @@ def evaluateUI(window: sg.Window, ser: Serial):
     else:
         return 0, CMD_ID.cmd_none
 
+def lsof(device_name):
+  command = ["lsof", "-t", device_name]
+  process = subprocess.Popen(command, stdout=subprocess.PIPE)
+  output, error = process.communicate()
+  #output =  subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
+  #output = os.system("lsof -t " + device_name)
+  return output
 
 # Produce a list of serial ports
 def getPorts():
@@ -109,6 +118,16 @@ def getPorts():
     print(allPorts)
     return comPortList
 
+
+def getPtyPorts():
+    pattern = '/dev/pts/[0-9]*'
+    allPtyPorts = glob.glob(pattern)
+    pseudoPtyPorts = []
+    for port in allPtyPorts:
+        if(lsof(port) == b''):
+            pseudoPtyPorts.append(port)
+    print(pseudoPtyPorts)
+    return pseudoPtyPorts
 
 # return current slider values
 def getSliderValues(window: sg.Window):
@@ -119,7 +138,7 @@ def getSliderValues(window: sg.Window):
 def openComPort(portName: str):
     if(portName != ''):
         try:
-            ser = Serial(portName, 115200, timeout=0, parity=PARITY_NONE, stopbits=STOPBITS_TWO) 
+            ser = Serial(portName, 115200) 
             return ser
         except SerialException:
             return None
@@ -131,6 +150,7 @@ def selectComPort(window: sg.Window):
     setStatus(window, "Select COM Port")
     while(True):
         event, values = window.read()
+        print(event)
         if event == 'COMPORT':
             portName = values['COMPORT']
             ser = openComPort(portName)
@@ -150,15 +170,15 @@ def setStatus(window: sg.Window, statusText: str):
 
 
 def main():
-    availablePorts = getPorts()
+    availablePorts = getPtyPorts() + getPorts()
     layout, window = createLayout(availablePorts)
 
     setStatus(window, "select COM port")
 
     # wait until a valid port is selected from the dropdown
     ser = selectComPort(window)
-    ser = Serial('/dev/pts/4', 115200, timeout=0, parity=PARITY_NONE, stopbits=STOPBITS_TWO) 
-    print(ser.name) 
+    #ser = Serial('/dev/pts/4', 115200) 
+    print(ser.name)
     if ser is None:
         return
 
@@ -177,7 +197,7 @@ def main():
                 ser.write(cmdBytes[i:i+1])
                 i = i + 1
                 ser.flush()
-                time.sleep(0.5)
+                time.sleep(0.01)
             #for i in range(9):
                # ser.write(cmdBytes[i:i+1][0])
                # print(hex(cmdBytes[i:i+1][0]))
