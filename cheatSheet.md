@@ -9,10 +9,11 @@ qemu-system-arm "--machine" "mps2-an385" "--cpu" "cortex-m3" "--kernel" "output/
 ```
 cd FreeRTOS_Examples/Examples/Example001/GCC/
 vim ../main.c
+:set number
 :packadd termdebug
 :let g:termdebugger = "gdb-multiarch"
 :Termdebug
-Ctrl+w Ctr+w,Ctrl+w L, Ctrl+w Ctr+w, Ctrl+w Ctr+w
+Ctrl+w Ctrl+w, Ctrl+w Ctr+w, Ctrl+w L, Ctrl+w Ctrl+w
 file output/RTOSDemo.out
 break 114
 target remote localhost:1234
