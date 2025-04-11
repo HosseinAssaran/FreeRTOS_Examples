@@ -1,5 +1,5 @@
 # FreeRTOS Examples
-Welcome to the FreeRTOS example repository! These examples originally were provided in the book [Mastering the FreeRTOS Real Time Kernel - a Hands On Tutorial Guide](https://www.freertos.org/fr-content-src/uploads/2018/07/161204_Mastering_the_FreeRTOS_Real_Time_Kernel-A_Hands-On_Tutorial_Guide.pdf), which you can access [here](https://www.freertos.org/Documentation/RTOS_book.html) along with the accompanying examples.
+Welcome to the FreeRTOS example repository! These examples originally were provided in the book [Mastering the FreeRTOS Real Time Kernel - a Hands On Tutorial Guide](https://www.freertos.org/media/2018/161204_Mastering_the_FreeRTOS_Real_Time_Kernel-A_Hands-On_Tutorial_Guide.pdf). You can get new versions of this book from [here](https://www.freertos.org/Documentation/RTOS_book.html) along with the accompanying examples.
 New examples are added to complete tutorial and these are drived from [Hands-On-RTOS-with-Microcontrollers](https://github.com/PacktPublishing/Hands-On-RTOS-with-Microcontrollers) by Brain Amos.
 
 ## Introduction
